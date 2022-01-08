@@ -8,9 +8,6 @@ browser = webdriver.Chrome("/Users/lukeh/Desktop/tmp/chromedriver")
 browser.get("https://www.basketball-reference.com/leagues/NBA_stats_per_game.html")
 time.sleep(1)
 
-table = browser.find_element_by_xpath(".//table[@id='stats']")
-print(table.text)
-
 data = []
 
 for i in range(82):
