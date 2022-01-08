@@ -5,18 +5,18 @@ import numpy as np
 import pandas as pd
 
 
-browser = webdriver.Chrome('/Users/lukeh/Desktop/tmp/chromedriver')
+browser = webdriver.Chrome('*** PATH TO CHROMEDRIVER ***') #Download chromedriver from https://chromedriver.chromium.org/downloads and save it to a known location
 browser.get("https://www.basketball-reference.com/leagues/NBA_2021_per_game.html")
 time.sleep(1)
 
-elem=browser.find_element_by_tag_name('body')
+body=browser.find_element_by_tag_name('body')
 
 pagedowns=60
 
 print('initialize while loop')
 
 while pagedowns:
-    elem.send_keys(Keys.PAGE_DOWN)
+    body.send_keys(Keys.PAGE_DOWN)
     time.sleep(0.2)
     pagedowns-=1
 
@@ -27,7 +27,7 @@ fullTable = table[0].find_elements_by_xpath(".//tr[@class='full_table']")
 data=[]
 print(fullTable[1].text.split(' '))
 
-#for i in range(len(fullTable)-1): #TODO: This loop is for more thorough scrapinh
+#for i in range(len(fullTable)-1): #TODO: This loop is for more thorough scraping
     #rank=fullTable[i].find_elements_by_xpath(".//td[@data-stat='ranker']")
     #name=fullTable[i].find_elements_by_xpath(".//td[@data-stat='player']")
     #data.append({name[0].text:{"rank":i}})
