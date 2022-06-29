@@ -2,7 +2,6 @@ import numpy
 import pandas as pd
 import time
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -32,17 +31,19 @@ try:
             links = browser.find_elements(By.XPATH, "//div[@class='weatherLinks']")[1]
             for day in range(1,32):
                 try:
+                    
                     print(f"clicking {months[month-1]} {day}")
-                    links.find_element(By.PARTIAL_LINK_TEXT, f"{months[month-1]} {day}").click()
+                    links.find_element(By.PARTIAL_LINK_TEXT, f"{months[month-1]} {day}").click() 
                     time.sleep(1)
-                    print("got links")
+
                     rows = browser.find_element(By.XPATH, "//table[@id='wt-his']").find_element(By.TAG_NAME, "tbody").find_elements(By.TAG_NAME, "tr")
-                    print("got rows")
+
                     for row in rows:
+                        values = row.find_elements(By.TAG_NAME, "td")
+
                         data["date"].append(f"{month}-{day}-{year}")
                         data["time"].append(row.find_element(By.TAG_NAME, "th").text)
-                        values = row.find_elements(By.TAG_NAME, "td")
-                        data["temp"].append(values[1].text)
+                        data["temp"].append(values[1].text)     
                         data["weather"].append(values[2].text)
                         data["wind"].append(values[3].text)
                         data["humidity"].append(values[5].text)
